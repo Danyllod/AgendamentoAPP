@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avalie nosso Atendimento</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f0f8ff;
+    }
+    .avaliacao-form {
+      max-width: 600px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .form-control,
+    .form-select {
+      border-radius: 4px;
+    }
+    .btn-custom {
+      background-color: #28a745;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1rem;
+    }
+    .btn-custom:hover {
+      background-color: #218838;
+    }
+    @media (max-width: 576px) {
+      .avaliacao-form {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="avaliacao-form">
+    <h2 class="mb-4 text-center">Avalie nosso Atendimento</h2>
+    <form id="avaliacaoForm" method="POST" action="{{ url_for('enviar_avaliacao') }}">
+      
+      <!-- Avaliação do Médico -->
+      <div class="form-group">
+        <label for="doctor">Médico:</label>
+        <select id="doctor" name="doctor_id" class="form-select" required>
+          <option value="">Selecione...</option>
+          {% for medico in medicos %}
+            <option value="{{ medico.id }}">{{ medico.name }} - {{ medico.specialty }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Qualidade do Atendimento (Médico):</label>
+        <div class="d-flex justify-content-around">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="qualidade_medico" id="otimo_medico" value="otimo" required>
+            <label class="form-check-label" for="otimo_medico">Ótimo</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="qualidade_medico" id="bom_medico" value="bom" required>
+            <label class="form-check-label" for="bom_medico">Bom</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="qualidade_medico" id="regular_medico" value="regular" required>
+            <label class="form-check-label" for="regular_medico">Regular</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="qualidade_medico" id="ruim_medico" value="ruim" required>
+            <label class="form-check-label" for="ruim_medico">Ruim</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="comentarios_medico">Comentários sobre o Atendimento do Médico:</label>
+        <textarea id="comentarios_medico" name="comentarios_medico" class="form-control" rows="3" placeholder="Escreva seus comentários sobre o atendimento do médico"></textarea>
+      </div>
+      
+      <hr>
+      
+      <!-- Avaliação da Recepcionista -->
+      <div class="form-group">
+        <label for="recepcao">Recepção:</label>
+        <select id="recepcao" name="recepcao" class="form-select" required>
+          <option value="">Selecione...</option>
+          <option value="recepcao_adulto">Recepção Adulto</option>
+          <option value="recepcao_infanto">Recepção Infanto</option>
+          <option value="recepcao_agendamento">Recepção Agendamento</option>
+        </select>
+      </div>
+      
+      <!-- Campo para selecionar o nome da recepcionista -->
+      <div class="form-group">
+        <label for="recepcionista_nome">Recepcionista:</label>
+        <select id="recepcionista_nome" name="recepcionista_nome" class="form-select" required>
+          <option value="">Selecione...</option>
+          <option value="leticia">Letícia</option>
+          <option value="maria">Maria</option>
+          <option value="antonia">Antônia</option>
+          <option value="jessica">Jéssica</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Qualidade do Atendimento (Recepcionista):</label>
+        <div class="d-flex justify-content-around">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="qualidade_recepcionista" id="otimo_recepcionista" value="otimo" required>
+            <label class="form-check-label" for="otimo_recepcionista">Ótimo</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="qualidade_recepcionista" id="bom_recepcionista" value="bom" required>
+            <label class="form-check-label" for="bom_recepcionista">Bom</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="qualidade_recepcionista" id="regular_recepcionista" value="regular" required>
+            <label class="form-check-label" for="regular_recepcionista">Regular</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="qualidade_recepcionista" id="ruim_recepcionista" value="ruim" required>
+            <label class="form-check-label" for="ruim_recepcionista">Ruim</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="comentarios_recepcionista">Comentários sobre o Atendimento da Recepcionista:</label>
+        <textarea id="comentarios_recepcionista" name="comentarios_recepcionista" class="form-control" rows="3" placeholder="Escreva seus comentários sobre o atendimento da recepcionista"></textarea>
+      </div>
+      
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-custom">Enviar Avaliação</button>
+      </div>
+    </form>
+    <div class="mt-3 text-center">
+      <button href="{{ url_for('dashboard') }}" class="btn btn-custom">Voltar ao Painel</button>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

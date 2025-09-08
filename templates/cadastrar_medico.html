@@ -1,0 +1,86 @@
+{% extends "agendamento.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="section-card">
+        <h2 class="section-title">Cadastrar Médico</h2>
+
+        <!-- Exibe mensagens de flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Formulário de Cadastro -->
+        <form method="POST" action="{{ url_for('cadastrar_medico') }}">
+            <div class="mb-3">
+                <label for="full_name" class="form-label">Nome Completo</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Nome de Exibição</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="crm" class="form-label">CRM</label>
+                <input type="text" class="form-control" id="crm" name="crm" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="specialty" class="form-label">Especialidade</label>
+                <select class="form-control" id="specialty" name="specialty" required>
+                    <option value="Neuro Pediatria">Neuro Pediatria</option>
+                    <option value="Psicologia">Psicologia</option>
+                    <option value="Psiquiatria">Psiquiatria</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="schedule" class="form-label">Agenda (Opcional)</label>
+                <input type="text" class="form-control" id="schedule" name="schedule">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+</div>
+<style>
+    .section-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    
+    .section-title {
+        color: #2c3e50;
+        border-bottom: 2px solid #4CAF50;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #34495e;
+    }
+    
+    .btn-primary {
+        background-color: #4CAF50;
+        border: none;
+        padding: 10px 25px;
+        transition: background-color 0.3s;
+    }
+    
+    .btn-primary:hover {
+        background-color: #45a049;
+    }
+    </style>
+{% endblock %}

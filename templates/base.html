@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Agendamento Online{% endblock %}</title>
+
+    <!-- PWA -->
+    <meta name="theme-color" content="#0d6efd"/>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}">
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+
+    <!-- Service Worker + Instalação -->
+    <script>
+        // Registrar o Service Worker
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/static/sw.js")
+                .then(reg => console.log("✅ SW registrado:", reg.scope))
+                .catch(err => console.log("❌ Erro ao registrar SW:", err));
+        }
+
+        let deferredPrompt;
+
+        window.addEventListener("beforeinstallprompt", (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+
+            // Criar botão de instalação
+            const installBtn = document.createElement("button");
+            installBtn.textContent = "📲 Instalar aplicativo";
+            installBtn.classList.add("btn", "btn-success", "m-3", "d-block");
+            document.body.appendChild(installBtn);
+
+            // Forçar o prompt de instalação imediatamente
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                console.log("➡️ Instalação imediata:", choiceResult.outcome);
+                deferredPrompt = null;
+            });
+
+            // Botão de fallback (se o usuário fechar o prompt)
+            installBtn.addEventListener("click", async () => {
+                installBtn.style.display = "none";
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`➡️ Instalação via botão: ${outcome}`);
+                deferredPrompt = null;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="admin-panel-container">
+    
+    <!-- Navegador Lateral -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Painel Administrador</h2>
+            <p>{{ current_user.full_name }}</p>
+        </div>
+        <div class="sidebar-menu">
+            <a href="{{ url_for('estatisticas') }}" class="btn-sidebar">Relatórios das consultas</a>
+            <a href="{{ url_for('lista_equipe') }}" class="btn-sidebar">Gerenciar Equipe Multiprofissional</a>
+            <a href="{{ url_for('cadastrar_medico') }}" class="btn-sidebar">Cadastrar Equipe Multiprofissional</a>
+            <a href="{{ url_for('estatisticas') }}" class="btn-sidebar">Dados do Avalie nosso Atendimento</a>
+            <a href="{{ url_for('admin_panel') }}" class="btn-sidebar">Pacientes Cadastrados</a>
+            <a href="{{ url_for('logout') }}" class="btn-sidebar btn-logout">Sair</a>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <!-- Consultas Agendadas -->
+
+        <div class="section-card">
+            <h2 class="section-title">        <div style="margin: 10px;">
+                <img src="{{ url_for('static', filename='logo3.png') }}" alt="logo">
+            </div>Consultas Agendadas</h2>
+            
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuário</th>
+                            <th>Data e Horário</th>
+                            <th> </th>
+                            <th>Médico</th>
+                            <th> </th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments %}
+                        <tr>
+                            <td>{{ appointment.id }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_user', user_id=appointment.user.id) }}" class="text-decoration-none text-success">
+                                    {{ appointment.user.full_name }}
+                                </a>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ url_for('update_appointment', appointment_id=appointment.id) }}" class="d-flex gap-2">
+                                    <input type="datetime-local" name="appointment_date" value="{{ appointment.appointment_date.strftime('%Y-%m-%dT%H:%M') }}" class="form-control" required>
+                                </form>
+                            </td>
+                            <td>{{ appointment.specialty }}</td>
+                            <td>
+                                <select name="doctor_id" class="form-control">
+                                    {% for doctor in doctors %}
+                                    <option value="{{ doctor.id }}" {% if appointment.doctor_id == doctor.id %}selected{% endif %}>
+                                        {{ doctor.name }} - {{ doctor.specialty }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <td>
+                                    <select name="status" class="form-control">
+                                        <option value="Aguardando Aprovação" {% if appointment.status == 'Aguardando Aprovação' %}selected{% endif %}>
+                                            Aguardando Aprovação
+                                        </option>
+                                        <option value="Consulta Marcada" {% if appointment.status == 'Consulta Marcada' %}selected{% endif %}>
+                                            Consulta Marcada
+                                        </option>
+                                        <option value="Consulta Cancelada" {% if appointment.status == 'Consulta Cancelada' %}selected{% endif %}>
+                                            Consulta Cancelada
+                                        </option>
+                                        <option value="Concluído" {% if appointment.status == 'Concluído' %}selected{% endif %}>
+                                            Concluído
+                                        </option>
+                                    </select>
+                                    <!-- ... badge de status ... --> <p></p>
+                                <span class="badge {% if appointment.status == 'Aguardando Aprovação' %}bg-warning
+                                    {% elif appointment.status == 'Consulta Marcada' %}bg-success
+                                    {% elif appointment.status == 'Concluído' %}bg-secondary
+                                    {% elif appointment.status == 'Solicitado Cancelamento' %}bg-info
+                                    {% elif appointment.status == 'Solicitado Remarcação' %}bg-info
+                                    {% elif appointment.status == 'Consulta Cancelada' %}bg-danger
+                                    {% elif appointment.status == 'Consulta Remarcada' %}bg-primary{% endif %}">
+                                    {{ appointment.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ url_for('update_appointment', appointment_id=appointment.id) }}" class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-action">Salvar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="9" class="text-center">Nenhuma consulta agendada.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Solicitações Pendentes -->
+        <div class="section-card">
+            <h2 class="section-title">Solicitações Pendentes</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuário</th>
+                            <th>Data Original</th>
+                            <th>Nova Data</th>
+                            <th>Tipo de Solicitação</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments if appointment.status in ['Solicitado Cancelamento', 'Solicitado Remarcação'] %}
+                        <tr>
+                            <td>{{ appointment.id }}</td>
+                            <td>                               
+                                <a href="{{ url_for('edit_user', user_id=appointment.user.id) }}" class="text-decoration-none text-success">
+                                {{ appointment.user.full_name }}
+                            </td>
+                            <td>{{ appointment.appointment_date.strftime('%d/%m/%Y %H:%M') }}</td>
+                            <td>
+                                N/A
+                            </td>
+                            <td>
+                                <span class="badge bg-info">{{ appointment.status }}</span>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ url_for('approve_request', appointment_id=appointment.id) }}" class="d-flex gap-2">
+                                    <button type="submit" name="action" value="aprovar" class="btn btn-success">Aprovar</button>
+                                    <button type="submit" name="action" value="rejeitar" class="btn btn-danger">Rejeitar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">Nenhuma solicitação pendente.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

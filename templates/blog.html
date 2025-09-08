@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog - Saúde e Bem-estar | Hospital CRESM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        /* Estilos da Navbar (copiados da home para consistência) */
+        .navbar-brand img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .navbar-custom {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .social-icons .nav-link {
+            font-size: 1.5rem;
+            padding: 0.5rem 0.7rem;
+        }
+
+        /* --- NOVOS ESTILOS PARA O BANNER DO BLOG --- */
+        .blog-banner {
+            position: relative;
+            padding: 5rem 0;
+            color: white;
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+            /* --- IMPORTANTE: Troque 'URL_DA_SUA_IMAGEM.jpg' pelo caminho da sua imagem de fundo --- */
+            background-image: linear-gradient(rgba(76, 4, 145, 0.75), rgba(76, 4, 145, 0.75)), url('https://images.unsplash.com/photo-1504439468489-c8920d796a29?q=80&w=2070&auto=format&fit=crop');
+        }
+        .blog-banner h1 {
+            font-weight: 700;
+            font-size: 3.5rem;
+        }
+        .blog-categories {
+            margin-top: 1.5rem;
+        }
+        .blog-categories .btn {
+            margin: 0.25rem;
+            border-radius: 20px;
+            padding: 8px 20px;
+        }
+
+        /* Estilos dos artigos */
+        .card-icon {
+            font-size: 2rem;
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top navbar-custom">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='sus.jpg') }}" alt="Logo SUS">
+                <img src="{{ url_for('static', filename='logo_cresm.png') }}" alt="Logo CRESM">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}">Cadastro</a>
+                    </li>
+                    <li class="nav-item social-icons ms-lg-3">
+                        <a class="nav-link" href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="bi bi-facebook"></i></a>
+                    </li>
+                    <li class="nav-item social-icons">
+                        <a class="nav-link" href="https://www.instagram.com/" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
+                    </li>
+                    <li class="nav-item social-icons">
+                        <a class="nav-link" href="https://www.youtube.com/" target="_blank" title="YouTube"><i class="bi bi-youtube"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="blog-banner">
+        <div class="container">
+            <h1 class="display-4">Blog da Saúde</h1>
+            <p class="lead">Conteúdos sobre saúde mental, qualidade de vida e reabilitação para você e sua família.</p>
+            <div class="blog-categories">
+                <a href="#" class="btn btn-outline-light">Saúde Mental</a>
+                <a href="#" class="btn btn-outline-light">Qualidade de Vida</a>
+                <a href="#" class="btn btn-outline-light">Reabilitação</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <div class="row g-4">
+            <div class="col-lg-12">
+                <article class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="card-title mb-3"><i class="bi bi-brain card-icon me-2"></i>5 Dicas Práticas para Cuidar da Sua Saúde Mental</h2>
+                            <ul class="list-group list-group-flush mt-3">
+                            <li class="list-group-item">
+                                <strong>1. Priorize o Sono:</strong> Uma boa noite de sono é fundamental. Durante o sono, nosso cérebro processa emoções e consolida memórias. A falta de sono está diretamente ligada ao aumento de estresse e ansiedade. Tente criar uma rotina, dormindo e acordando em horários parecidos.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>2. Movimente o Corpo:</strong> A atividade física libera endorfinas, conhecidas como "hormônios da felicidade". Estudos comprovam que 30 minutos de caminhada por dia podem ser tão eficazes quanto medicamentos para tratar casos leves de depressão e ansiedade.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>3. Pratique a Atenção Plena (Mindfulness):</strong> Tire 5 minutos do seu dia para focar na sua respiração. A atenção plena é uma técnica validada cientificamente para reduzir a ansiedade, pois treina seu cérebro a focar no presente, em vez de se preocupar com o passado ou o futuro.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>4. Conecte-se com Pessoas:</strong> Relações sociais saudáveis são um fator de proteção para a saúde mental. Converse com amigos e familiares, compartilhe o que sente. O isolamento pode agravar sentimentos negativos.
+                            </li>
+                            <li class="list-group-item">
+                                <strong>5. Alimente-se Bem:</strong> O que você come afeta seu humor. Alimentos ricos em ômega-3 (como peixes), frutas e vegetais ajudam a regular os neurotransmissores do bem-estar. Evite o excesso de açúcar e processados.
+                            </li>
+                        </ul>
+                        </div>
+                </article>
+            </div>
+
+            <div class="col-lg-12">
+                <article class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="card-title mb-3"><i class="bi bi-heart-pulse card-icon me-2"></i>Pequenos Hábitos que Transformam sua Qualidade de Vida</h2>
+                        <p class="card-text">Qualidade de vida não é sobre ter uma vida perfeita, mas sobre encontrar equilíbrio e satisfação no dia a dia. A chave está em cultivar pequenos hábitos que, somados, fazem uma grande diferença.</p>
+                        
+                        <p><strong>Crie Metas Realistas:</strong> Divida grandes objetivos em passos menores e comemore cada conquista. Isso gera um sentimento de propósito e realização, combatendo a frustração.</p>
+                        
+                        <p><strong>Tenha um Hobby:</strong> Dedicar tempo a uma atividade prazerosa, seja ler, cuidar de plantas, cozinhar ou tocar um instrumento, reduz o estresse e estimula a criatividade. É um momento só seu, fundamental para o bem-estar.</p>
+
+                        <p><strong>Pratique a Gratidão:</strong> Anotar três coisas pelas quais você é grato antes de dormir é um exercício simples com respaldo científico. A prática da gratidão muda o foco dos problemas para os aspectos positivos da vida, aumentando os níveis de felicidade.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-lg-12">
+                <article class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="card-title mb-3"><i class="bi bi-person-arms-up card-icon me-2"></i>Entendendo a Reabilitação: Redescobrindo a Vida</h2>
+                        <p class="card-text">O processo de reabilitação, seja física ou mental, vai muito além de tratar uma doença ou lesão. É um caminho de redescoberta, focado em restaurar a autonomia e a qualidade de vida do paciente de forma integral.</p>
+                        
+                        <p><strong>Uma Abordagem Multidisciplinar:</strong> O sucesso da reabilitação depende de uma equipe integrada. Médicos, fisioterapeutas, psicólogos, terapeutas ocupacionais e outros especialistas trabalham juntos. Essa abordagem holística garante que o paciente seja cuidado em todas as suas dimensões: física, emocional e social.</p>
+
+                        <p><strong>O Paciente como Protagonista:</strong> Na reabilitação moderna, o paciente não é passivo. Ele participa ativamente do seu plano de tratamento, definindo metas junto com a equipe. Esse protagonismo é essencial para a motivação e para resultados mais duradouros.</p>
+
+                        <p><strong>Paciência e Celebração:</strong> A recuperação não é linear; haverá dias bons e dias difíceis. É fundamental ter paciência com o processo e celebrar cada pequena vitória, pois cada passo, por menor que seja, é um avanço em direção ao bem-estar.</p>
+                        </div>
+                </article>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg">
+                <i class="bi bi-arrow-left-circle me-2"></i>Voltar para a Página Inicial
+            </a>
+        </div>
+    </main>
+
+    <footer class="text-center py-4 mt-5 bg-light">
+        <p class="mb-0">&copy; 2025 Hospital CRESM. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

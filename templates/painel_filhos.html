@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel dos Filhos - Agendamento Infanto</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div class="container my-4">
+    <h1 class="mb-4 text-center">Painel dos Filhos</h1>
+    
+    <div class="mb-3">
+      <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Voltar ao Dashboard</a>
+      <a href="{{ url_for('cadastrar_filho') }}" class="btn btn-primary">Cadastrar Filho</a>
+      <a href="{{ url_for('agendar_consulta_infanto') }}" class="btn btn-success">Agendar Consulta</a>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <h5>Filhos Cadastrados</h5>
+      </div>
+      <div class="card-body">
+        {% if filhos %}
+          <ul class="list-group">
+            {% for filho in filhos %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>{{ filho.nome_completo }}</strong> - Idade: {{ filho.idade }} anos<br>
+                  <small>CPF: {{ filho.cpf }}</small><br>
+                  <small>Endereço: {{ filho.endereco }}</small>
+                </div>
+                <div>
+                  <form method="POST" action="{{ url_for('excluir_filho', filho_id=filho.id) }}" style="display: inline-block;" onsubmit="return confirm('Deseja realmente excluir este filho?');">
+                    <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                  </form>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">Nenhum filho cadastrado.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

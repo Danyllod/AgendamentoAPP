@@ -1,0 +1,672 @@
+/* Estilos Gerais */
+body {
+    background-color: #f0f8ff; /* Fundo azul claro */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+/* Estilos para Alertas */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.alert-error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #c62828;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+}
+
+/* Estilos para Cards */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Fundo branco */
+    padding: 20px;
+}
+
+.section-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilos para Botões */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #218838; /* Verde escuro */
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-action {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-action:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.btn-action:active {
+    transform: translateY(0);
+}
+
+.btn-edit {
+    background-color: #ffc107; /* Amarelo */
+    color: #000;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+.btn-historic {
+    background-color: #17a2b8; /* Azul claro */
+    color: white;
+}
+
+.btn-historic:hover {
+    background-color: #138496;
+}
+
+.btn-success, .btn-danger {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-success:hover, .btn-danger:hover {
+    opacity: 0.9;
+}
+
+/* Estilos para Formulários */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
+}
+
+/* Estilos para Tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+table th {
+    background-color: #28a745; /* Verde */
+    color: white;
+    font-weight: bold;
+}
+
+table tr:hover {
+    background-color: #f8f9fa; /* Fundo cinza claro ao passar o mouse */
+}
+
+table form {
+    display: inline-block;
+    margin: 0;
+}
+
+table select, table input[type="datetime-local"] {
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    margin-right: 8px;
+}
+
+/* Estilos para Badges */
+.badge {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.bg-warning { background-color: #ffc107; color: #000; }
+.bg-success { background-color: #28a745; color: #fff; }
+.bg-secondary { background-color: #6c757d; color: #fff; }
+.bg-info { background-color: #17a2b8; color: #fff; }
+.bg-danger { background-color: #dc3545; color: #fff; }
+.bg-primary { background-color: #007bff; color: #fff; }
+
+/* Estilos para Mensagens de Flash */
+.flash-messages {
+    margin-bottom: 1.5rem;
+}
+
+.flash-messages .alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.flash-messages .alert-success {
+    background-color: #d4edda; /* Verde claro */
+    border-color: #c3e6cb;
+    color: #155724; /* Verde escuro */
+}
+
+.flash-messages .alert-error {
+    background-color: #f8d7da; /* Vermelho claro */
+    border-color: #f5c6cb;
+    color: #721c24; /* Vermelho escuro */
+}
+
+/* Estilos para o Painel de Administração */
+.admin-panel {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+/* Estilos para a Página de Estatísticas */
+.statistics-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.statistics-container h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.summary-cards .card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.summary-cards .card h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.summary-cards .card .stat-value {
+    font-size: 2rem;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.chart-section {
+    margin-bottom: 40px;
+}
+
+.chart-section h2 {
+    font-size: 1.75rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+    }
+
+
+    table select, table input[type="datetime-local"] {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .btn-action {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .admin-panel {
+        padding: 10px;
+    }
+
+    .section-card {
+        padding: 15px;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+
+    .statistics-container h1 {
+        font-size: 2rem;
+    }
+
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+
+
+    .section-card {
+        padding: 15px;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    table th, table td {
+        padding: 8px;
+        font-size: 0.875rem;
+    }
+
+    table th {
+        font-size: 0.875rem;
+    }
+
+    table tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    table td {
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+        flex: 1;
+    }
+
+    table td:last-child {
+        border-bottom: none;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        font-size: 0.875rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form select, form button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+/* Estilos para o Painel Administrativo */
+.admin-panel-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Navegador Lateral */
+.sidebar {
+    width: 250px;
+    background-color: #03152e; /* Verde */
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.sidebar-header p {
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-sidebar {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-sidebar:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-logout {
+    background-color: #dc3545; /* Vermelho */
+    text-align: center;
+    border-radius: 5px;
+}
+
+.btn-logout:hover {
+    background-color: #c82333; /* Vermelho escuro */
+}
+
+/* Conteúdo Principal */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f8f9fa; /* Fundo cinza claro */
+}
+
+/* Estilos para Tabelas */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botões de Ação */
+.btn-action {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-action:hover {
+    background-color: #218838;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .admin-panel-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+}
+/* Estilos Gerais */
+body {
+    background-color: #f0f8ff; /* Fundo azul claro */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Fundo branco */
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilos para Formulários */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.25);
+}
+
+/* Estilos para Botões */
+.btn-primary {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #218838; /* Verde escuro */
+}
+
+/* Estilos para Mensagens Flash */
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #e8f5e9; /* Verde claro */
+    color: #2e7d32; /* Verde escuro */
+    border: 1px solid #2e7d32;
+}
+
+.alert-error {
+    background-color: #ffebee; /* Vermelho claro */
+    color: #c62828; /* Vermelho escuro */
+    border: 1px solid #c62828;
+}
+
+/* Responsividade para Dispositivos Móveis */
+@media (min-width: 576px) and (max-width: 767px) {
+    .container {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .form-control {
+        font-size: 0.875rem;
+    }
+
+    .btn-primary {
+        font-size: 0.875rem;
+    }
+
+    .alert {
+        font-size: 0.875rem;
+    }
+}
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.clickable-row:hover {
+    background-color: #f8f9fa;
+}

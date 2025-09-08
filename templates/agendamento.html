@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="section-card">
+        <h2 class="section-title">Painel de agendamentos</h2>
+
+            <p class="mb-4" ><h4 style="color: #45a049;">Bem-vindo, {{ current_user.full_name }}!</h4></p>
+
+        <!-- Botão para voltar -->
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary mb-3">Voltar</a>
+
+        <!-- Formulário de Agendamento -->
+        <h3 class="section-title">Agendar Consulta</h3>
+        <form method="POST" action="{{ url_for('schedule') }}">
+            <div class="mb-3">
+                <label for="specialty" class="form-label">Especialidade</label>
+                <select class="form-control" id="specialty" name="specialty" required onchange="loadDoctors()">
+                    <option value="">Selecione uma especialidade</option>
+                    <option value="Neuro Pediatria">Neuro Pediatria</option>
+                    <option value="Psicologia">Psicologia</option>
+                    <option value="Psiquiatria">Psiquiatria</option>
+                </select>
+            </div>
+        
+            <div class="mb-3">
+                <label for="doctor" class="form-label">Médico</label>
+                <select class="form-control" id="doctor" name="doctor_id" required disabled>
+                    <option value="">Primeiro selecione uma especialidade</option>
+                </select>
+            </div>
+        
+            <div class="mb-3">
+                <label for="appointment_date" class="form-label">Data e Hora</label>
+                <input type="datetime-local" class="form-control" id="appointment_date" 
+                    name="appointment_date" min="{{ min_date }}" required>
+                <small class="form-text text-muted">Horário comercial: 08:00 às 18:00</small>
+            </div>
+        
+            <div class="mb-3">
+                <label for="description" class="form-label">Descrição</label>
+                <textarea 
+                    class="form-control" 
+                    id="description" 
+                    name="description" 
+                    rows="3" 
+                    placeholder="Descreva o motivo da consulta"
+                ></textarea>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Agendar</button>
+        </form>
+
+<script>
+function loadDoctors() {
+    const specialty = document.getElementById('specialty').value;
+    const doctorSelect = document.getElementById('doctor');
+    
+    if(specialty) {
+        fetch(`/get-doctors/${specialty}`)
+            .then(response => response.json())
+            .then(data => {
+                doctorSelect.innerHTML = '<option value="">Selecione um médico</option>';
+                data.forEach(doctor => {
+                    const option = document.createElement('option');
+                    option.value = doctor.id;
+                    option.textContent = `${doctor.name} - ${doctor.crm}`;
+                    doctorSelect.appendChild(option);
+                });
+                doctorSelect.disabled = false;
+            });
+    } else {
+        doctorSelect.innerHTML = '<option value="">Primeiro selecione uma especialidade</option>';
+        doctorSelect.disabled = true;
+    }
+}
+
+document.getElementById('appointment_date').min = new Date().toISOString().slice(0,16);
+</script>
+<style>
+.section-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    color: #2c3e50;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #34495e;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    border: none;
+    padding: 10px 25px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+}
+</style>
+{% endblock %}

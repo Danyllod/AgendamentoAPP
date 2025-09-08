@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agendamento_app
+    command: python app.py
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+
+  venom_bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agendamento_venom
+    working_dir: /app/whatsapp_bot
+    command: node venom_handler.js
+    env_file:
+      - .env
+    depends_on:
+      - app
+      - redis
+    volumes:
+      - .:/app
+
+  redis:
+    image: redis:7-alpine
+    container_name: agendamento_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:

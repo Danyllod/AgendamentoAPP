@@ -1,0 +1,17 @@
+dash==3.2.0
+email_validator==2.2.0
+Flask==3.1.1
+Flask_Login==0.6.3
+Flask_Migrate==4.1.0
+flask_sqlalchemy==3.1.1
+langchain_core==0.3.74
+langchain_google_genai==2.1.9
+pandas==2.3.1
+plotly==6.3.0
+redis==5.2.1
+reportlab==4.3.1
+setuptools==75.1.0
+SQLAlchemy==2.0.43
+validate_docbr==1.10.0
+Werkzeug==3.1.3
+python-dotenv==1.0.1

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Equipe Multiprofissional</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .delete-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+        .stats {
+            background-color: #f5f5f5;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        td:nth-child(5), td:nth-child(6) {
+            text-align: center;
+        }
+        .stars {
+            color: #ffd700;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="stats">
+        <h1>Equipe Multiprofissional</h1>
+        <a href="{{ url_for('admin_panel') }}">← Voltar ao Painel</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome Completo</th>
+                <th>Nome de Exibição</th>
+                <th>CRM/CPF</th>
+                <th>Especialidade</th>
+                <th>Consultas Atendidas</th>
+                <th>Avaliação Média</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for medico in medicos %}
+            <tr>
+                <td>{{ medico.Doctor.full_name }}</td>
+                <td>{{ medico.Doctor.name }}</td>
+                <td>{{ medico.Doctor.crm }}</td>
+                <td>{{ medico.Doctor.specialty }}</td>
+                <td>{{ medico.total_consultas }}</td>
+                <td>
+                    {% if medico.media_avaliacao > 0 %}
+                        <span class="stars">{{ "%.1f"|format(medico.media_avaliacao) }}</span>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('deletar_medico', medico_id=medico.Doctor.id) }}">
+                        <button type="submit" class="delete-btn" 
+                                onclick="return confirm('Tem certeza que deseja excluir este médico?')">
+                            Excluir
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

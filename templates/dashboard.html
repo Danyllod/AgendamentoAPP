@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRESM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .header {
+        background-color: #fff;
+        padding: 15px;
+        border-bottom: 2px solid #28a745;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header h2 {
+        color: #28a745;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+        .menu-icons {
+            font-size: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .card-custom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+            margin: 8px;
+            height: 150px;
+            /* Altura fixa para todos os cards */
+        }
+
+        .card-custom:hover {
+            background-color: #e9f5e9;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .card-custom img {
+            width: 64px;
+            /* Tamanho fixo para os ícones */
+            height: 64px;
+            margin-right: 10px;
+        }
+
+        .btn-sidebar:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-logout {
+        background-color: #dc3545;
+        text-align: center;
+        border-radius: 5px;
+        padding: 8px 15px;
+        color: white;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-block;
+        width: 120px;
+    }
+
+    .btn-logout:hover {
+        background-color: #c82333;
+    }
+
+        .btn-sidebar {
+
+            color: white;
+            border: none;
+            padding: 10px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div>
+            <img src="{{ url_for('static', filename='logo_cresm.png') }}" alt="logo">
+        </div>
+        <h2>Olá, {{ current_user.full_name }}! </h2>
+        <a href="{{ url_for('logout') }}" class="btn-logout">Sair</a>
+
+    </div>
+    
+
+    <div class="container mt-4">
+        <h5 class="text-success">Serviços</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{{ url_for('agendamento') }}">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/agendamento.png') }}"
+                            alt="">Agendamento Online - Adulto</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ url_for('painel_filhos') }}">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/agendamento.png') }}"
+                            alt="">Agendamento Online - Infanto </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ url_for('consultas') }}">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/doctor.png') }}"
+                            alt="">Consultas</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="https://wa.me/556298175443">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/whatsapp.png') }}"
+                            alt="">Chat Virtual</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ url_for('edit_profile') }}">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/cadastro.png') }}"
+                            alt="">Atualizar Cadastro</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ url_for('avalie_nos') }}">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/avalie.png') }}"
+                            alt="">Avalie nosso Atendimento</div>
+                </a>
+            </div>
+
+        </div>
+
+        <h5 class="text-success mt-4">Acompanhe nossas Redes Sociais</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="https://www.instagram.com/cresm.prof.jamilissy/">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/instagram.png') }}" alt="">Instagram
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="https://www.youtube.com/@CREDEQProfJamilIssy">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/youtube.png') }}" alt="">Youtube
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="https://www.facebook.com/CredeqAparecida/?locale=pt_BR">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/facebook.png') }}" alt="">Facebook
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <h5 class="text-success mt-4">Sobre o CRESM</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="https://www.cresm-go.org.br/nossa-historia/">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/cresm1.png') }}"
+                            alt="">Nossa História</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="https://www.cresm-go.org.br/contato/">
+                    <div class="card-custom"><img style="margin-right: 25px;"
+                            src="{{ url_for('static', filename='/icones/contatos.png') }}" alt="">Contatos</div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a
+                    href="https://www.cresm-go.org.br/portal-da-transparencia/pessoal/ato-convocatorio-e-avisos-de-selecao-publica-para-recrutamento-e-selecao-de-empregados-e-seus-respectivos-resultados/">
+                    <div class="card-custom"><img
+                            src="{{ url_for('static', filename='/icones/trabalhe_conosco.png') }}">Trabalhe Conosco
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="https://www.cresm-go.org.br/relatorio-de-gestao-da-unidade-hospitalar/perguntas-frequentes/">
+                    <div class="card-custom"><img src="{{ url_for('static', filename='/icones/faq.png') }}" alt="">FAQ -
+                        Perguntas Frequentes</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
